@@ -14,7 +14,7 @@ done
     sudo apt update && sudo apt -y install vim-scripts zsh zsh-syntax-highlighting zsh-autosuggestions
     echo "installing support apps..."
     sudo apt update && sudo apt -y install htop lsd bat vim git
-    echo "installing jetbrains mono fonts..."
+    echo "installing JetBrainsMono terminal fonts..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
     echo "installing tmux & support apps..."
     sudo apt update && sudo apt -y install tmux xclip

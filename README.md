@@ -1,6 +1,6 @@
 .zshrc
 
-colorization enhancements, fixed prompt with realtime clock and rprompt execution time
+fixed prompt with realtime clock and rprompt execution time
 
 ![Screenshot from 2024-01-29 15-10-16](https://github.com/XenBuddha/dotfiles/assets/24990580/7ed11369-536e-4dca-a1a3-bd215e54fca0)
 

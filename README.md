@@ -1,12 +1,12 @@
 ### .zshrc
 
-fixed prompt with realtime clock and rprompt execution time
+Static prompt with realtime clock and rprompt execution time
 
 ![Screenshot from 2024-01-29 15-10-16](https://github.com/XenBuddha/dotfiles/assets/24990580/7ed11369-536e-4dca-a1a3-bd215e54fca0)
 
 ### .tmux.conf
 
-mouse support; toggle status line on/off; tpm integration prompt with host, session#, window#, pane#, pane command, window indicator and day/date/time on right 
+Mouse support; toggle status line on/off; tpm integration prompt with host, session#, window#, pane#, pane command, window indicator and day/date/time on right 
 
 ![Screenshot from 2024-01-29 15-17-39](https://github.com/XenBuddha/dotfiles/assets/24990580/8d7b38ec-be00-4c30-8893-a6f206b34543)
 

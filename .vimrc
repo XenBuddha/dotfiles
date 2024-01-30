@@ -11,6 +11,7 @@ cmap w!! w !sudo tee > /dev/null %
 "augroup END
 
 " Make Vim able to edit crontab files again.
+set nocompatible		  " Allow Vim-specific features otherwise disable
 set backupskip=/tmp/*,/private/tmp/*
 set backup                        " enable backups
 set noswapfile                    " it's 2015, Vim.

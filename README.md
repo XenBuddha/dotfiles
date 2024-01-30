@@ -6,7 +6,7 @@ fixed prompt with realtime clock and rprompt execution time
 
 ### .tmux.conf
 
-mouse support; status line on/off; tpm integration
+mouse support; toggle status line on/off; tpm integration
 prompt with host, session#, window#, pane#, pane command, window indicator and day/date/time on right 
 
 ![Screenshot from 2024-01-29 15-17-39](https://github.com/XenBuddha/dotfiles/assets/24990580/8d7b38ec-be00-4c30-8893-a6f206b34543)

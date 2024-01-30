@@ -48,20 +48,24 @@ set linebreak
 set colorcolumn=+1
 
 " Enable filetype plugins
+set nocp
 filetype plugin on
 filetype indent on
 
-"Always show current position
+" Show cursor line
+set cursorline
+
+" Always show current position
 set ruler
 
-"Clipboard stuff
+" Clipboard stuff
 set clipboard=unnamedplus
 
 " Height of the command bar
 set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned
-set hid
+set hidden
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent

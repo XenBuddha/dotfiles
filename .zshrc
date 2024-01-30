@@ -207,6 +207,12 @@ alias tsstat='tailscale status'
 alias tls='tmux ls'
 alias c='clear'
 
+# alias function - cd to git_projects/argument directory
+
+gpd() {
+  cd ~/Drop/git_projects/$1
+}
+
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh

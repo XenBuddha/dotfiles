@@ -16,4 +16,4 @@ Mouse on in TMUX and off in vim
 
 ### install.sh
 
-Finds dot files in home then if the original file exists, creates a backup to {file}.dtbak.  Once backed up to {file}.dtbak symlink the new dotfile in place.  Then the script will finish by installing stuff as you require.
+Finds dot files in home then if the original file exists, creates a backup to {file}.dtbak.  Once backed up to {file}.dtbak symlink the new dotfile in place.  Then the script will finish by installing stuff as required.

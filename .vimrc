@@ -1,14 +1,5 @@
-" execute pathogen#infect()
-set mouse=
-set ttymouse=
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
-
-" Highlight characters over 80
-"augroup vimrc_autocmds
-"  autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#111111
-"  autocmd BufEnter * match OverLength /\%81v.*/
-"augroup END
 
 " Make Vim able to edit crontab files again.
 set nocompatible		  " Allow Vim-specific features otherwise disable
@@ -77,8 +68,8 @@ set ignorecase
 " When searching try to be smart about cases
 set smartcase
 
-" Highlight search results
-set hlsearch
+" Clear highlight last search
+set nohlsearch
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -278,70 +269,24 @@ augroup END
 nnoremap gp `[v`]
 
 """"""""""""""""""""
-" PATHOGEN PLUGINS "
+" vim-plug: Vim plugin manager"
 """"""""""""""""""""
+   call plug#begin('~/.vim/plugged')
 
-" START NERDTree if no files are specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+   " Make sure you use single quotes
 
-" Close NERDTree if it's the only window left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+   " On-demand loading
+   Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
-" https://github.com/nathanaelkane/vim-indent-guides/issues/20
-let g:indent_guides_exclude_filetypes = ['nerdtree']
-" END NERDTree
+   " Plugin outside ~/.vim/plugged with post-update hook
+   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" START Airline
-let g:airline#extensions#tabline#enabled = 1
-set laststatus=2
-let g:airline_theme='murmur'
-let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#branch#enabled=1
-" END Airline
 
-" START windowswap
-let g:windowswap_map_keys = 0 "prevent default bindings
-nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
-nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
-" END windowswap
+   " Initialize plugin system
+   call plug#end()
 
-" START ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-" END ctrlp
-
-" START ansible-vim
-let g:ansible_extra_keywords_highlight = 1
-let g:ansible_name_highlight = 'b'
-let g:ansible_extra_syntaxes = "sh.vim"
-
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-autocmd BufWrite * :call DeleteTrailingWS()
-
-" START vim-hclfmt
-let g:hcl_fmt_autosave = 1
-let g:tf_fmt_autosave = 0
-let g:nomad_fmt_autosave = 1
-" END vim-hclfmt
-
-nmap <silent> <leader><bslash> :call ToggleIndentGuidesSpaces()<cr>
-function! ToggleIndentGuidesSpaces()
-	if exists('b:iguides_spaces')
-		call matchdelete(b:iguides_spaces)
-		unlet b:iguides_spaces
-	else
-		let pos = range(1, &l:textwidth, &l:shiftwidth)
-		call map(pos, '"\\%" . v:val . "v"')
-		let pat = '\%(\_^\s*\)\@<=\%(' . join(pos, '\|') . '\)\s'
-		let b:iguides_spaces = matchadd('CursorLine', pat)
-	endif
-endfunction
-
-" START vim-hashicorp-terraform
-let g:terraform_align = 1
-" END vim-hashicorp-terraform
+"""""""""""""""""""
+" PLugin Parameters
+"""""""""""""""""""
+" NerdTree
+ let NERDTreeShowHidden=1

@@ -16,7 +16,7 @@ done
     sudo mkdir -p /usr/share/zsh-history-substring-search
     sudo wget -O /usr/share/zsh-history-substring-search/zsh-history-substring-search.zsh https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh
     echo "installing support apps..."
-    sudo apt update && sudo apt -y install htop lsd bat vim git
+    sudo apt update && sudo apt -y install htop lsd bat vim git gh
     echo "installing JetBrainsMono terminal fonts..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
     echo "installing tmux & support apps..."

@@ -237,7 +237,7 @@ git_prompt() {
     [ -n "${branch}" ] && echo "\ue725 ${branch} "
 }
 setopt PROMPT_SUBST
-PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─} %B%F{%(#.red.blue)}%n%F{%(#.blue.white}'@$'%F{%(#.blue.green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%* %{$fg[yellow]%}$(git_prompt)%F{%(#.blue.green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{green}>)%b%F{reset} '
+PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─} %B%F{%(#.red.blue)}%n%F{%(#.blue.white}'@$'%F{%(#.blue.green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%* %{$fg[yellow]%}$(gitprompt) $(gitprompt_secondary)%F{%(#.blue.green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{green}>)%b%F{reset} '
 
 TMOUT=1
 TRAPALRM() {

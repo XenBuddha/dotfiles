@@ -12,6 +12,9 @@ done
 # Install  vim-addons ZSH and ZSH extras
     echo "installing vim & zsh extras..."
     sudo apt update && sudo apt -y install vim-scripts zsh zsh-syntax-highlighting zsh-autosuggestions
+    sudo git clone https://github.com/zsh-users/zsh-history-substring-search /usr/share/zsh-history-substring-search
+    sudo mkdir -p /usr/share/zsh-history-substring-search
+    sudo wget -O /usr/share/zsh-history-substring-search/zsh-history-substring-search.zsh https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh
     echo "installing support apps..."
     sudo apt update && sudo apt -y install htop lsd bat vim git
     echo "installing JetBrainsMono terminal fonts..."

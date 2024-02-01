@@ -1,4 +1,4 @@
-### .zshrc
+## .zshrc
 
 Static prompt with realtime clock and rprompt execution time.
 

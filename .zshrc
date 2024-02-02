@@ -211,20 +211,20 @@ gpd() {
 }
 
 # enable auto-suggestions based on the history
-if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    . ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
     # change suggestion color
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 fi
 
 # enable zsh-history-substring-search
-source /usr/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
 # the above keybindings can be derived from terminal prompt - press C-v then up/down arrows
 
 # enable git-prompt
-source ~/.zsh/git-prompt.zsh/git-prompt.zsh
+source ~/.zsh/git-prompt/git-prompt.zsh
 
 # Static prompt with realtime clock, rprompt execution time and compact git functionality
 ZSH_GIT_PROMPT_FORCE_BLANK=1

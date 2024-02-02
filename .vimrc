@@ -38,7 +38,7 @@ set title
 set linebreak
 set colorcolumn=+1
 
- Enable filetype plugins
+" Enable filetype plugins
 set nocp
 filetype plugin on
 filetype indent on

@@ -226,7 +226,7 @@ bindkey '^[OB' history-substring-search-down
 # enable git-prompt
 source ~/.zsh/git-prompt.zsh/git-prompt.zsh
 
-# Set prompt with real time clock, git functionality and rprompt execution time
+# Static prompt with realtime clock, rprompt execution time and compact git functionality
 ZSH_GIT_PROMPT_FORCE_BLANK=1
 ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
 ZSH_GIT_PROMPT_SHOW_UPSTREAM="notracking"

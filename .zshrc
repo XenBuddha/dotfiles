@@ -18,7 +18,7 @@ PROMPT_EOL_MARK=""
 bindkey -e                                        # emacs key bindings
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^U' backward-kill-line                   # ctrl + U
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+bindkey '^[[3;5~' kill-word                       # ctrl + Sun
 bindkey '^[[3~' delete-char                       # delete
 bindkey '^[[1;5C' forward-word                    # ctrl + ->
 bindkey '^[[1;5D' backward-word                   # ctrl + <-
@@ -87,8 +87,6 @@ fi
 if [ "$color_prompt" = yes ]; then
     # override default virtualenv indicator in prompt
     VIRTUAL_ENV_DISABLE_PROMPT=1
-
-    # configure_prompt
 
     # enable syntax-highlighting
     if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
@@ -208,7 +206,6 @@ alias tls='tmux ls'
 alias c='clear'
 
 # alias function - cd to git_projects/argument directory
-
 gpd() {
   cd ~/Drop/git_projects/$1
 }
@@ -220,30 +217,45 @@ if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 fi
 
-#
 # enable zsh-history-substring-search
 source /usr/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
+# the above keybindings can be derived from terminal prompt - press C-v then up/down arrows
 
-# Set Prompt with real time clock
-git_prompt() {
-    local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3-)"
-    local branch_truncated="${branch:0:30}"
-    if (( ${#branch} > ${#branch_truncated} )); then
-        branch="${branch_truncated}..."
-    fi
-   # [ -n "${branch}" ] && echo "\uf1d3${branch}"
-    [ -n "${branch}" ] && echo "\ue725 ${branch} "
-}
+# enable git-prompt
+source ~/.zsh/git-prompt.zsh/git-prompt.zsh
+
+# Set prompt with real time clock, git functionality and rprompt execution time
+ZSH_GIT_PROMPT_FORCE_BLANK=1
+ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
+ZSH_GIT_PROMPT_SHOW_UPSTREAM="notracking"
+
+ZSH_THEME_GIT_PROMPT_PREFIX=" · "
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" · "
+ZSH_THEME_GIT_PROMPT_BRANCH="⎇  %{$fg_bold[yellowt ]%}"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL="%{$fg_bold[green]%} "
+ZSH_THEME_GIT_PROMPT_UPSTREAM_NO_TRACKING="%{$fg_bold[red]%}!"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX="%{$fg[red]%}(%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX="%{$fg[red]%})"
+ZSH_THEME_GIT_PROMPT_DETACHED="@%{$fg_no_bold[cyan]%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg_no_bold[red]%}↓"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_no_bold[green]%}↑"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}✖"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}●"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}✚"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}⚑"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} "
+ZSH_THEME_GIT_PROMPT_TAGS_PREFIX=" ·  "
+
 setopt PROMPT_SUBST
-PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─} %B%F{%(#.red.blue)}%n%F{%(#.blue.white}'@$'%F{%(#.blue.green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%* %{$fg[yellow]%}$(gitprompt) $(gitprompt_secondary)%F{%(#.blue.green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{green}>)%b%F{reset} '
-
+PROMPT=$'%F{green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─} %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
 TMOUT=1
 TRAPALRM() {
     zle reset-prompt
 }
-
 
 # Set RPrompt with execution time
 zmodload zsh/datetime

@@ -11,9 +11,6 @@ setopt promptsubst         # enable command substitution in prompt
 
 WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 
-# hide EOL sign ('%')
-PROMPT_EOL_MARK=""
-
 # configure key keybindings
 bindkey -e                                        # emacs key bindings
 bindkey ' ' magic-space                           # do history expansion on space
@@ -53,116 +50,55 @@ setopt hist_expire_dups_first # delete duplicates first when HISTFILE size excee
 setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
+#setopt share_history         # share command history data
 
-# force zsh to show the complete history
-alias history="history 0"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+# enable syntax-highlighting
+if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+   . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+    ZSH_HIGHLIGHT_STYLES[default]=none
+    ZSH_HIGHLIGHT_STYLES[unknown-token]=underline
+    ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=cyan,bold
+    ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
+    ZSH_HIGHLIGHT_STYLES[global-alias]=fg=green,bold
+    ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
+    ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
+    ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=green,underline
+    ZSH_HIGHLIGHT_STYLES[path]=bold
+    ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
+    ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=
+    ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
+    ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue,bold
+    ZSH_HIGHLIGHT_STYLES[command-substitution]=none
+    ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=magenta,bold
+    ZSH_HIGHLIGHT_STYLES[process-substitution]=none
+    ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta,bold
+    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=green
+    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=green
+    ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
+    ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=blue,bold
+    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
+    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow
+    ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=yellow
+    ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=magenta
+    ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta,bold
+    ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta,bold
+    ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=magenta,bold
+    ZSH_HIGHLIGHT_STYLES[assign]=none
+    ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
+    ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
+    ZSH_HIGHLIGHT_STYLES[named-fd]=none
+    ZSH_HIGHLIGHT_STYLES[numeric-fd]=none
+    ZSH_HIGHLIGHT_STYLES[arg0]=fg=cyan
+    ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red,bold
+    ZSH_HIGHLIGHT_STYLES[bracket-level-1]=fg=blue,bold
+    ZSH_HIGHLIGHT_STYLES[bracket-level-2]=fg=green,bold
+    ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=magenta,bold
+    ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=yellow,bold
+    ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
+    ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
-fi
-
-
-if [ "$color_prompt" = yes ]; then
-    # override default virtualenv indicator in prompt
-    VIRTUAL_ENV_DISABLE_PROMPT=1
-
-    # enable syntax-highlighting
-    if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-        . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-        ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-        ZSH_HIGHLIGHT_STYLES[default]=none
-        ZSH_HIGHLIGHT_STYLES[unknown-token]=underline
-        ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=cyan,bold
-        ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
-        ZSH_HIGHLIGHT_STYLES[global-alias]=fg=green,bold
-        ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
-        ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
-        ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=green,underline
-        ZSH_HIGHLIGHT_STYLES[path]=bold
-        ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
-        ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=
-        ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
-        ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue,bold
-        ZSH_HIGHLIGHT_STYLES[command-substitution]=none
-        ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=magenta,bold
-        ZSH_HIGHLIGHT_STYLES[process-substitution]=none
-        ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta,bold
-        ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=green
-        ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=green
-        ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
-        ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=blue,bold
-        ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
-        ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow
-        ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=yellow
-        ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=magenta
-        ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta,bold
-        ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta,bold
-        ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=magenta,bold
-        ZSH_HIGHLIGHT_STYLES[assign]=none
-        ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
-        ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
-        ZSH_HIGHLIGHT_STYLES[named-fd]=none
-        ZSH_HIGHLIGHT_STYLES[numeric-fd]=none
-        ZSH_HIGHLIGHT_STYLES[arg0]=fg=cyan
-        ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red,bold
-        ZSH_HIGHLIGHT_STYLES[bracket-level-1]=fg=blue,bold
-        ZSH_HIGHLIGHT_STYLES[bracket-level-2]=fg=green,bold
-        ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=magenta,bold
-        ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=yellow,bold
-        ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
-        ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
-    fi
-else
-    PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%(#.#.$) '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
-    TERM_TITLE=$'\e]0;${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%n@%m: %~\a'
-    ;;
-*)
-    ;;
-esac
-
-precmd() {
-    # Print the previously configured title
-    print -Pnr -- "$TERM_TITLE"
-
-    # Print a new line before the prompt, but only if it is not the first line
-    if [ "$NEWLINE_BEFORE_PROMPT" = yes ]; then
-        if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
-            _NEW_LINE_BEFORE_PROMPT=1
-        else
-            print ""
-        fi
-    fi
-}
-
-# enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
@@ -177,23 +113,16 @@ if [ -x /usr/bin/dircolors ]; then
     alias diff='diff --color=auto'
     alias ip='ip --color=auto'
 
-    export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
-    export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
-    export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-    export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
-    export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-    export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-    export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-
-    # Take advantage of $LS_COLORS for completion as well
+# Take advantage of $LS_COLORS for completion as well
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
     zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
 fi
 
-# some more ls aliases
+# some more aliases
 alias ll="lsd -AlFh"
 alias la="lsd -Ah"
-alias lr="ls -alFhR"
+alias lr="tree -a"
 alias cat="batcat"
 alias top="htop"
 alias aptup='sudo apt update && sudo apt upgrade'
@@ -207,7 +136,7 @@ alias c='clear'
 
 # alias function - cd to git_projects/argument directory
 gpd() {
-  cd ~/Drop/git_projects/$1
+cd ~/Drop/git_projects/$1
 }
 
 # enable auto-suggestions based on the history
@@ -218,54 +147,57 @@ if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
 fi
 
 # enable zsh-history-substring-search
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[OA' history-substring-search-up
-bindkey '^[OB' history-substring-search-down
+if [ -f ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
+    . ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+    bindkey '^[OA' history-substring-search-up
+    bindkey '^[OB' history-substring-search-down
+fi
 # the above keybindings can be derived from terminal prompt - press C-v then up/down arrows
 
 # enable git-prompt
-source ~/.zsh/git-prompt/git-prompt.zsh
+if [ -f ~/.zsh/git-prompt/git-prompt.zsh ]; then
+    . ~/.zsh/git-prompt/git-prompt.zsh
 
-# Static prompt with realtime clock, rprompt execution time and compact git functionality
-ZSH_GIT_PROMPT_FORCE_BLANK=1
-ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
-ZSH_GIT_PROMPT_SHOW_UPSTREAM="notracking"
+# git-prompt settings
+    ZSH_GIT_PROMPT_FORCE_BLANK=1
+    ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
+    ZSH_GIT_PROMPT_SHOW_UPSTREAM="notracking"
+# git-prompt theme
+    ZSH_THEME_GIT_PROMPT_PREFIX=" · "
+    ZSH_THEME_GIT_PROMPT_SUFFIX=""
+    ZSH_THEME_GIT_PROMPT_SEPARATOR=" · "
+    ZSH_THEME_GIT_PROMPT_BRANCH="⎇  %{$fg_bold[yellow]%}"
+    ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL="%{$fg_bold[green]%} "
+    ZSH_THEME_GIT_PROMPT_UPSTREAM_NO_TRACKING="%{$fg_bold[red]%}!"
+    ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX="%{$fg[red]%}(%{$fg[yellow]%}"
+    ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX="%{$fg[red]%})"
+    ZSH_THEME_GIT_PROMPT_DETACHED="@%{$fg_no_bold[cyan]%}"
+    ZSH_THEME_GIT_PROMPT_BEHIND=" %{$fg_no_bold[red]%}↓"
+    ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg_no_bold[green]%}↑"
+    ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}✖"
+    ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}●"
+    ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}✚"
+    ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
+    ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}⚑"
+    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} "
+    ZSH_THEME_GIT_PROMPT_TAGS_PREFIX=" ·  "
+fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" · "
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_SEPARATOR=" · "
-ZSH_THEME_GIT_PROMPT_BRANCH="⎇  %{$fg_bold[yellow]%}"
-ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL="%{$fg_bold[green]%} "
-ZSH_THEME_GIT_PROMPT_UPSTREAM_NO_TRACKING="%{$fg_bold[red]%}!"
-ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX="%{$fg[red]%}(%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX="%{$fg[red]%})"
-ZSH_THEME_GIT_PROMPT_DETACHED="@%{$fg_no_bold[cyan]%}"
-ZSH_THEME_GIT_PROMPT_BEHIND=" %{$fg_no_bold[red]%}↓"
-ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg_no_bold[green]%}↑"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}✖"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}●"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}✚"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
-ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}⚑"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} "
-ZSH_THEME_GIT_PROMPT_TAGS_PREFIX=" ·  "
-
+# Static prompt with rprompt execution time and compact git functionality
 setopt PROMPT_SUBST
-PROMPT=$'%F{green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─} %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
-TMOUT=1
-TRAPALRM() {
-    zle reset-prompt
-}
+
+PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
 
 # Set RPrompt with execution time
 zmodload zsh/datetime
 
 prompt_preexec() {
-  prompt_prexec_realtime=${EPOCHREALTIME}
+    prompt_prexec_realtime=${EPOCHREALTIME}
 }
 
 prompt_precmd() {
-  if (( prompt_prexec_realtime )); then
+if (( prompt_prexec_realtime )); then
     local -rF elapsed_realtime=$(( EPOCHREALTIME - prompt_prexec_realtime ))
     local -rF s=$(( elapsed_realtime%60 ))
     local -ri elapsed_s=${elapsed_realtime}
@@ -282,11 +214,11 @@ prompt_precmd() {
     else
       printf -v prompt_elapsed_time '%ims' $(( s*1000 ))
     fi
-    unset prompt_prexec_realtime
-  else
-    # Clear previous result when hitting ENTER with no command to execute
-    unset prompt_elapsed_time
-  fi
+unset prompt_prexec_realtime
+
+# Clear previous result when hitting ENTER with no command to execute
+unset prompt_elapsed_time
+fi
 }
 
 setopt nopromptbang prompt{cr,percent,sp,subst}
@@ -296,5 +228,3 @@ add-zsh-hook preexec prompt_preexec
 add-zsh-hook precmd prompt_precmd
 
 RPS1='%F{cyan}${prompt_elapsed_time}%F{none}'
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

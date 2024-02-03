@@ -1,6 +1,6 @@
 ### .zshrc
 
-Static prompt with realtime clock, rprompt execution time and compact git functionality.
+Static prompt with rprompt execution time and compact git functionality.
 
 ![Screenshot from 2024-02-01 20-36-20](https://github.com/XenBuddha/dotfiles/assets/24990580/324edf30-9dfa-4037-8d66-320541bc8c60)
 

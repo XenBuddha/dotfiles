@@ -19,6 +19,10 @@ echo "installing JetBrainsMono terminal fonts..."
 echo "installing tmux plugin manager..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+echo "Installing vim plugin manager..."
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 echo "installing zsh dependencies..."
 sudo apt -y install zsh-syntax-highlighting
 mkdir -p ~/.zsh/git-prompt

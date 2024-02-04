@@ -9,8 +9,7 @@ for file in $(find . -maxdepth 1 -name ".*" -type f  -printf "%f\n" ); do
     ln -s $PWD/$file ~/$file
 done
 
-# Install  vim-addons ZSH and ZSH extras
-
+# Install utilties, font, TPM, and .zshrc dependencies
 echo "installing utilities..."
 sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip
 

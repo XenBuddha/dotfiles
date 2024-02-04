@@ -16,4 +16,8 @@ Mouse on in TMUX and off in vim.
 
 ### install.sh
 
-Finds .{files} in the home directory, then if the original .{file} exists, creates a backup to .{file}.dtbak.  Once backed up to .{file}.dtbak symlink the new .{file} in place.  The script will finish by installing stuff as desired.
+Finds .{files} in the home directory.  If the original .{file} exists, create a backup to .{file}.dtbak.  Once backed up to .{file}.dtbak, symlink the new .{file} in place.  The script will finish by installing applications to support the zshrc configuration.
+
+### uninstall.sh
+
+Finds .{files} in the home directory and removes them if the file is a symlink, Then restores the .{file}.bak to its original location if the backup file exists.

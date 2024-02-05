@@ -189,7 +189,7 @@ setopt PROMPT_SUBST
 
 PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
 
-TMOUT=3
+TMOUT=1
 TRAPALRM() {
  # zle reset-prompt
 }

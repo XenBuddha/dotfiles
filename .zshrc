@@ -189,6 +189,11 @@ setopt PROMPT_SUBST
 
 PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
 
+TMOUT=3
+TRAPALRM() {
+ # zle reset-prompt
+}
+
 # Set RPrompt with execution time
 zmodload zsh/datetime
 
@@ -215,7 +220,7 @@ if (( prompt_prexec_realtime )); then
       printf -v prompt_elapsed_time '%ims' $(( s*1000 ))
     fi
 unset prompt_prexec_realtime
-
+   else
 # Clear previous result when hitting ENTER with no command to execute
 unset prompt_elapsed_time
 fi

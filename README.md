@@ -20,4 +20,4 @@ Finds .{files} in the home directory.  If the original .{file} exists, create a 
 
 ### uninstall.sh
 
-Finds .{files} in the home directory and removes them if the file is a symlink, Then restores the .{file}.bak to its original location if the backup file exists.
+Finds .{files} in the home directory and removes them if the file is a symlink, Then restores the .{file}.dtbak to its original location if the backup file exists.

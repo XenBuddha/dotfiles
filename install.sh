@@ -11,7 +11,7 @@ done
 
 # Install utilties, font, TPM, and .zshrc dependencies
 echo "installing utilities..."
-sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip
+sudo apt update && sudo apt -y install vim-scripts zsh curl htop lsd bat vim git gh tmux xclip
 
 echo "installing JetBrainsMono terminal fonts..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"

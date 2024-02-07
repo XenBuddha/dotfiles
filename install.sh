@@ -31,6 +31,10 @@ mkdir -p ~/.zsh/zsh-autosuggestions
 wget -O ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh https://github.com/zsh-users/zsh-autosuggestions/raw/master/zsh-autosuggestions.zsh
 mkdir -p ~/.zsh/zsh-history-substring-search
 wget -O ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh
-
+echo
 echo "Installed"
-echo "use chsh -s /bin/zsh to switch to ZSH shell"
+echo "Use chsh -s /bin/zsh to switch to ZSH shell"
+echo
+echo "On first run of VIM execute :PlugInstall to init plugins"
+echo "NerdTree is mapped to F2"
+echo

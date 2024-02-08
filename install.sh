@@ -11,7 +11,6 @@ done
 
 # Install utilties, font, TPM, and .zshrc dependencies
 echo "installing utilities..."
-<<<<<<< HEAD
 sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip curl fc-cache
 =======
 sudo apt update && sudo apt -y install vim-scripts zsh curl htop lsd bat vim git gh tmux xclip

@@ -11,7 +11,11 @@ done
 
 # Install utilties, font, TPM, and .zshrc dependencies
 echo "installing utilities..."
-sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip curl fc-cache
+<<<<<<< HEAD
+sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip
+=======
+sudo apt update && sudo apt -y install vim-scripts zsh curl htop lsd bat vim git gh tmux xclip
+>>>>>>> b195ca162c520e4e20f24ea5162912c68664d39e
 
 echo "installing JetBrainsMono terminal fonts..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
@@ -31,6 +35,10 @@ mkdir -p ~/.zsh/zsh-autosuggestions
 wget -O ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh https://github.com/zsh-users/zsh-autosuggestions/raw/master/zsh-autosuggestions.zsh
 mkdir -p ~/.zsh/zsh-history-substring-search
 wget -O ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh
-
+echo
 echo "Installed"
-echo "use chsh -s /bin/zsh to switch to ZSH shell"
+echo "Use chsh -s /bin/zsh to switch to ZSH shell"
+echo
+echo "On first run of VIM execute :PlugInstall to init plugins"
+echo "NerdTree is mapped to F2"
+echo

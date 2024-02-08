@@ -30,6 +30,9 @@ mkdir -p ~/.zsh/zsh-autosuggestions
 wget -O ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh https://github.com/zsh-users/zsh-autosuggestions/raw/master/zsh-autosuggestions.zsh
 mkdir -p ~/.zsh/zsh-history-substring-search
 wget -O ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh
+
+# stiffle login motd
+touch ~/.hushlogin
 echo
 echo "Installed"
 echo "Use chsh -s /bin/zsh to switch to ZSH shell"

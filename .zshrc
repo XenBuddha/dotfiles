@@ -133,6 +133,9 @@ alias tsip='tailscale ip'
 alias tsstat='tailscale status'
 alias tls='tmux ls'
 alias c='clear'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit' 
 
 # alias function - cd to git_projects/argument directory
 gpd() {

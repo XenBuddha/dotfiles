@@ -1,3 +1,5 @@
+# NOTE: This script depends on SUDO being installed on your OS and the account being installed to must be in sudoers
+
 #!/bin/bash
 
 # Find all dot files then if the original file exists, create a backup

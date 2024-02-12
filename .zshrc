@@ -190,7 +190,13 @@ fi
 # Static prompt with rprompt execution time and compact git functionality
 setopt PROMPT_SUBST
 
+# if ssh into this host then host name is red
+
+if [[ -n $SSH_CLIENT ]]; then
+PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{red}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
+else
 PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
+fi
 
 TMOUT=1
 TRAPALRM() {

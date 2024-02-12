@@ -16,10 +16,10 @@ done
 echo "installing utilities..."
 sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip curl
 echo "installing JetBrainsMono terminal fonts..."
+sudo apt -y install gzip fontconfig
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 
 echo "installing tmux plugin manager..."
-sudo apt -y install gzip fontconfig
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Installing vim plugin manager..."

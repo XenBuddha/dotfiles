@@ -4,6 +4,7 @@
 
 # Find all dot files then if the original file exists, create a backup
 # Once backed up to {file}.dtbak symlink the new dotfile in place
+
 for file in $(find . -maxdepth 1 -name ".*" -type f  -printf "%f\n" ); do
     if [ -e ~/$file ]; then
         mv -f ~/$file{,.dtbak}
@@ -13,11 +14,12 @@ done
 
 # Install utilties, font, TPM, and .zshrc dependencies
 echo "installing utilities..."
-sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip curl fc-cache
+sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip curl
 echo "installing JetBrainsMono terminal fonts..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 
 echo "installing tmux plugin manager..."
+sudo apt -y install zip fontconfig
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Installing vim plugin manager..."
@@ -33,7 +35,7 @@ wget -O ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh https://github.com/zs
 mkdir -p ~/.zsh/zsh-history-substring-search
 wget -O ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh
 
-# stiffle login motd
+# stiffle shh login motd
 touch ~/.hushlogin
 echo
 echo "Installed"

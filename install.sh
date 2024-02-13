@@ -1,6 +1,24 @@
-# NOTE: This script depends on SUDO being installed on your OS and the account being installed to must be in sudoers
-
 #!/bin/bash
+
+echo
+
+# Check if sudo is installed on host
+if ! [ -x "$(command -v sudo)" ]; then
+    echo 'Error: sudo is not installed.' >&2
+    exit 1
+else
+    #Check if user has sudo privledge
+    if [ $EUID -gt 0 ]
+    then
+        echo "Script needs to run as root, spawning..."
+        sudo "$0"
+        exit  # THIS IS IMPORTANT!
+    else
+        echo "Script is now running as root, continuing..."
+    fi
+fi
+
+echo
 
 # Find all dot files then if the original file exists, create a backup
 # Once backed up to {file}.dtbak symlink the new dotfile in place
@@ -13,19 +31,21 @@ for file in $(find . -maxdepth 1 -name ".*" -type f  -printf "%f\n" ); do
 done
 
 # Install utilties, font, TPM, and .zshrc dependencies
+echo
 echo "installing utilities..."
 sudo apt update && sudo apt -y install vim-scripts zsh htop lsd bat vim git gh tmux xclip curl
+echo
 echo "installing JetBrainsMono terminal fonts..."
 sudo apt -y install unzip fontconfig
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
-
+echo
 echo "installing tmux plugin manager..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
+echo
 echo "Installing vim plugin manager..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+echo
 echo "installing zsh dependencies..."
 sudo apt -y install zsh-syntax-highlighting
 mkdir -p ~/.zsh/git-prompt
@@ -37,9 +57,12 @@ wget -O ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh htt
 
 # stiffle shh login motd
 touch ~/.hushlogin
+
 echo
 echo "Installed"
+echo
 echo "Use chsh -s /bin/zsh to switch to ZSH shell"
+echo "then run 'exec zsh' to reload zsh environment"
 echo
 echo "On first run of VIM execute :PlugInstall to init plugins"
 echo "NerdTree is mapped to F2"

@@ -6,17 +6,7 @@ echo
 if ! [ -x "$(command -v sudo)" ]; then
     echo 'Error: sudo is not installed.' >&2
     exit 1
-else
-    #Check if user has sudo privledge
-    if [ $EUID -gt 0 ]
-    then
-        echo "Script needs to run as root, spawning..."
-        sudo "$0"
-        exit  # THIS IS IMPORTANT!
-    else
-        echo "Script is now running as root, continuing..."
     fi
-fi
 
 echo
 

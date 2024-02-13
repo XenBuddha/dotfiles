@@ -136,8 +136,8 @@ alias c='clear'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit' 
-alias gpl-'git pull'
-alias gph-'git push'
+alias gpl='git pull'
+alias gph='git push'
 
 # alias function - cd to git_projects/argument directory
 gpd() {

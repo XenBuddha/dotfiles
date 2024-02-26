@@ -69,6 +69,7 @@ if is_sudoer; then
     echo
     echo "Use chsh -s /bin/zsh to switch to ZSH shell"
     echo "then run 'exec zsh' to reload zsh environment"
+    echo "or logout and login again"
     echo
     echo "On first run of VIM execute :PlugInstall to init plugins"
     echo "NerdTree is mapped to F2"

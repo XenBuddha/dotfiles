@@ -167,7 +167,7 @@ if [ -f ~/.zsh/git-prompt/git-prompt.zsh ]; then
     ZSH_GIT_PROMPT_FORCE_BLANK=1
     ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
     ZSH_GIT_PROMPT_SHOW_STASH=1
-    ZSH_GIT_PROMPT_SHOW_UPSTREAM="symbol"
+    ZSH_GIT_PROMPT_SHOW_UPSTREAM="tracking"
 # git-prompt theme
     ZSH_THEME_GIT_PROMPT_PREFIX=" · "
     ZSH_THEME_GIT_PROMPT_SUFFIX=""

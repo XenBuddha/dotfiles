@@ -166,7 +166,8 @@ if [ -f ~/.zsh/git-prompt/git-prompt.zsh ]; then
 # git-prompt settings
     ZSH_GIT_PROMPT_FORCE_BLANK=1
     ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
-    ZSH_GIT_PROMPT_SHOW_UPSTREAM="notracking"
+    ZSH_GIT_PROMPT_SHOW_STASH=1
+    ZSH_GIT_PROMPT_SHOW_UPSTREAM="symbol"
 # git-prompt theme
     ZSH_THEME_GIT_PROMPT_PREFIX=" · "
     ZSH_THEME_GIT_PROMPT_SUFFIX=""
@@ -186,6 +187,11 @@ if [ -f ~/.zsh/git-prompt/git-prompt.zsh ]; then
     ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}⚑"
     ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} "
     ZSH_THEME_GIT_PROMPT_TAGS_PREFIX=" ·  "
+    ZSH_THEME_GIT_PROMPT_SECONDARY_PREFIX=""
+    ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
+    ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="🏷 "
+    ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX=""
+    ZSH_THEME_GIT_PROMPT_TAG="%{$fg_bold[magenta]%}"
 fi
 
 # Static prompt with rprompt execution time and compact git functionality
@@ -194,9 +200,9 @@ setopt PROMPT_SUBST
 # if ssh into this host then host name is red
 
 if [[ -n $SSH_CLIENT ]]; then
-PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{red}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
+    PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{red}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt)$(gitprompt_secondary)) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
 else
-PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
+PROMPT=$'%F{green)}┌─── %B%F{%(#.red.blue)}%n%F{white}'@$'%F{green)}%m%b%F{white}\u00b7%f%F{yellow}%D{%a %d}%F{white}\u00b7%F{yellow}%*%{$fg[yellow]%}$(gitprompt)$(gitprompt_secondary) %F{green)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{green)}]\n└─%(?.\ue602.%F{red}\ue602)%b %F{reset}'
 fi
 
 TMOUT=1

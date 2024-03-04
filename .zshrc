@@ -252,3 +252,8 @@ RPS1='%F{cyan}${prompt_elapsed_time}%F{none}'
 
 # Need this directory in PATH to install xcp-ng guest-tools on Debian VM
 export -U PATH=/sbin${PATH:+:$PATH}
+
+# source Openhab FireMOTD if exists
+if [ -f ~/.FireMOTD ]; then
+    . ~/.FireMOTD
+fi
